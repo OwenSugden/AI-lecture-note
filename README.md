@@ -28,17 +28,38 @@ Each week's raw files and generated outputs are excluded from version control (s
 - [ffmpeg](https://ffmpeg.org/download.html) installed and available on your system PATH
 - An NVIDIA GPU with CUDA support (optional, but strongly recommended — CPU transcription is dramatically slower)
 
-## Libraries to install
+## Setup
+
+This project uses a Python virtual environment (`venv`) to keep its dependencies isolated from your global Python install. All required packages are listed in `requirements.txt`. In your terminal,
+
+**1. Create the virtual environment** (run once, from the project root):
 
 ```bash
-pip install faster-whisper tqdm pikepdf pymupdf4llm
+python -m venv venv
 ```
 
-If you're running on GPU and hit a `cublasXX.dll` / `cudnnXX.dll` load error on Windows, also install:
+**2. Activate it** (run every time you open a new terminal session to work on this project):
+
+- macOS / Linux:
+  ```bash
+  source venv/bin/activate
+  ```
+- Windows (PowerShell):
+  ```powershell
+  venv\Scripts\Activate.ps1
+  ```
+
+Your terminal prompt should now show `(venv)` at the start of the line, confirming it's active.
+
+**3. Install dependencies:**
 
 ```bash
-pip install nvidia-cublas-cu12 nvidia-cudnn-cu12
+pip install -r requirements.txt
 ```
+
+GPU-acceleration packages (`nvidia-cublas-cu12`, `nvidia-cudnn-cu12`) are only installed automatically on Windows and Linux, since they require an NVIDIA GPU and don't apply on macOS. If you're on Windows/Linux with an NVIDIA GPU and still hit a `cublasXX.dll` / `cudnnXX.dll` load error at runtime, this is a known Windows DLL-path issue — see the code comments in `whisper.py` for the fix.
+
+If you don't have an NVIDIA GPU, transcription will fall back to running on CPU (slower, but fully functional).
 
 ## Usage
 
