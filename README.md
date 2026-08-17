@@ -30,7 +30,7 @@ Each week's raw files and generated outputs are excluded from version control (s
 
 ## Setup
 
-This project uses a Python virtual environment (`venv`) to keep its dependencies isolated from your global Python install. All required packages are listed in `requirements.txt`. In your terminal,
+This project uses a Python virtual environment (`venv`) to keep its dependencies isolated from your global Python install. All required packages are listed in `requirements.txt`.
 
 **1. Create the virtual environment** (run once, from the project root):
 
@@ -66,7 +66,7 @@ If you don't have an NVIDIA GPU, transcription will fall back to running on CPU 
 Set the target week and run the transcription script:
 
 ```bash
-python whisper.py
+python main.py {course} {week number}
 ```
 
 This will locate the `.mp4` in the matching `lectures/weeks/week-X/` folder, extract audio, transcribe it, and write out `week-X.srt` in the same folder.
