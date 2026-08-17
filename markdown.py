@@ -1,13 +1,13 @@
 import pymupdf4llm
 import glob
 
-week_number = 3
-pdfs = glob.glob(f"lectures/weeks/week-{week_number}/*.pdf")
+def convertToMarkdown(course, lectureNumber):
+    pdfs = glob.glob(f"lectures/{course}/weeks/week-{lectureNumber}/*.pdf")
 
-for count, pdf in enumerate(pdfs, 1):
-    md_text = pymupdf4llm.to_markdown(pdf)
+    for pdf in pdfs:
+        md_text = pymupdf4llm.to_markdown(pdf)
 
-    output_file = f"lectures/weeks/week-{week_number}/lecture-{week_number}.{count}.md"
+        output_file = f"lectures/{course}/weeks/week-{lectureNumber}/output/{course}-lecture-{lectureNumber}.md"
 
-    with open(output_file, "w", encoding="utf-8") as f:
-        f.write(md_text)
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(md_text)
