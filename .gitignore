@@ -4,3 +4,4 @@
 *.srt
 *.md
 venv
+.vscode
