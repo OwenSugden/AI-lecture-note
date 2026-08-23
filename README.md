@@ -4,23 +4,10 @@ A personal automation pipeline that turns raw lecture recordings and slide decks
 
 ## What it does
 
-1. **Transcription** — Extracts audio from a lecture video (`ffmpeg`) and transcribes it locally using `faster-whisper`, producing timestamped `.srt` subtitle files.
-2. **Slide parsing** — Converts lecture slide PDFs into Markdown for easy downstream processing.
-3. **(Planned)** — Merge transcript + slide content and push structured notes to Notion via the Notion API, with a simple local drag-and-drop front end.
-
-## Project structure
-
-```
-lectures/
-  weeks/
-    week-1/
-      *.mp4      (raw lecture recording — ignored by git)
-      *.wav      (extracted audio — ignored by git)
-      *.pdf      (lecture slides — ignored by git)
-      *.srt      (generated transcript — ignored by git)
-```
-
-Each week's raw files and generated outputs are excluded from version control (see `.gitignore`) — only the processing scripts are tracked.
+1. **Folder input** — Drag and drop the PDF lecture slides and the mp4 lecture recording into the **inbox** directory.
+2. **Transcription** — Extracts audio from a lecture video (`ffmpeg`) and transcribes it locally using `faster-whisper`, producing timestamped `.srt` subtitle files.
+3. **Slide parsing** — Converts lecture slide PDFs into Markdown for easy downstream processing.
+   
 
 ## Requirements
 
@@ -63,6 +50,7 @@ If you don't have an NVIDIA GPU, transcription will fall back to running on CPU 
 
 ## Usage
 
+Before running the command below, ensure the necessary files are in the **inbox** directory.
 Set the target week and run the transcription script:
 
 ```bash
