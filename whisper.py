@@ -56,7 +56,11 @@ def transcribe(course, lectureNumber):
             file.write(f"{str(count)}\n{startTime} -->  {endTime}\n{segment.text}\n\n")
 
 
+def strip_srt_timestamps(srt_text):
+    pass
 
+def build_merge_input(transcript_path, slides_md_path, output_path):
+    pass
 
 
 
