@@ -27,14 +27,6 @@ _load_cuda_dlls()
 
 from faster_whisper import WhisperModel
 
-def timeconvert(time):
-    hours = int(time // 3600)
-    minutes = int((time % 3600) // 60)
-    seconds = int(time % 60)
-    milliseconds = round((time % 1) * 1000)
-
-    return f"{hours:02}:{minutes:02}:{seconds:02},{milliseconds:03}"
-
 def transcribe(course, lectureNumber):
     video_path = glob.glob(f"lectures/{course}/weeks/week-{lectureNumber}/*.mp4")[0]
     subprocess.run(["ffmpeg", "-i", video_path, f"lectures/{course}/weeks/week-{lectureNumber}/week-{lectureNumber}.wav"])
@@ -48,15 +40,9 @@ def transcribe(course, lectureNumber):
 
     segments, info = model.transcribe(audio_path)
 
-    srt_path = f"lectures/{course}/weeks/week-{lectureNumber}/output/week-{lectureNumber}.srt"
-    with open(srt_path, "w") as file:
-        for count, segment in enumerate(segments, 1):
-            startTime = timeconvert(segment.start)
-            endTime = timeconvert(segment.end)
-            file.write(f"{str(count)}\n{startTime} -->  {endTime}\n{segment.text}\n\n")
-
-
-
-
+    txt_path = f"lectures/{course}/weeks/week-{lectureNumber}/output/week-{lectureNumber}.txt"
+    with open(txt_path, "w") as file:
+        for segment in segments:
+            file.write(segment.text.strip() + " ")
 
 
