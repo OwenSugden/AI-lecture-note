@@ -5,7 +5,7 @@ A personal automation pipeline that turns raw lecture recordings and slide decks
 ## What it does
 
 1. **Folder input** — Drag and drop the PDF lecture slides and the mp4 lecture recording into the **inbox** directory.
-2. **Transcription** — Extracts audio from a lecture video (`ffmpeg`) and transcribes it locally using `faster-whisper`, producing timestamped `.srt` subtitle files.
+2. **Transcription** — Extracts audio from a lecture video (`ffmpeg`) and transcribes it locally using `faster-whisper`, producing `.txt` files.
 3. **Slide parsing** — Converts lecture slide PDFs into Markdown for easy downstream processing.
    
 
@@ -57,7 +57,7 @@ Set the target week and run the transcription script:
 python main.py {course} {week number}
 ```
 
-This will locate the `.mp4` in the matching `lectures/weeks/week-X/` folder, extract audio, transcribe it, and write out `week-X.srt` in the same folder.
+This will locate the `.mp4` in the matching `lectures/weeks/week-X/` folder, extract audio, transcribe it, and write out `week-X.txt` in the same folder.
 
 ## Status
 
