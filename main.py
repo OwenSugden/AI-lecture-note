@@ -1,7 +1,7 @@
 import sys
 import organise
 import whisper
-import markdown
+import md_export
 
 course = sys.argv[1]
 lectureNumber = sys.argv[2]
@@ -11,6 +11,7 @@ organise.moveContents(course, lectureNumber)
 
 whisper.transcribe(course, lectureNumber)
 
-markdown.convertToMarkdown(course, lectureNumber)
+md_export.convertToMarkdown(course, lectureNumber)
+md_export.filterTemplateImages(course, lectureNumber)
 
 

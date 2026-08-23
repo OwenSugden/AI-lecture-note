@@ -46,7 +46,7 @@ def transcribe(course, lectureNumber):
         print("No CUDA GPU found, falling back to CPU")
         model = WhisperModel("medium", device="cpu", compute_type="int8")
 
-    segments = model.transcribe(audio_path)
+    segments, info = model.transcribe(audio_path)
 
     srt_path = f"lectures/{course}/weeks/week-{lectureNumber}/output/week-{lectureNumber}.srt"
     with open(srt_path, "w") as file:

@@ -13,6 +13,7 @@ httpcore==1.0.9
 httpx==0.28.1
 huggingface_hub==1.27.0
 idna==3.18
+imagehash==4.3.2
 lxml==6.1.1
 networkx==3.6.1
 numpy==2.5.2
@@ -25,7 +26,9 @@ psutil==7.2.2
 pymupdf==1.28.2
 pymupdf-layout==1.28.2
 pymupdf4llm==1.28.2
+PyWavelets==1.9.0
 PyYAML==6.0.3
+scipy==1.15.1
 setuptools==84.0.0
 tabulate==0.10.0
 tokenizers==0.23.1
