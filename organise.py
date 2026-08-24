@@ -2,12 +2,12 @@ import os
 import glob
 import shutil
 
-def organiseFolders(course, lectureNumber):
-  os.makedirs(f"lectures/{course}/weeks/week-{lectureNumber}/output", exist_ok=True)
+def organiseFolders(course, weekNumber, lectureNumber):
+  os.makedirs(f"lectures/{course}/weeks/week-{weekNumber}/lecture-{lectureNumber}/output", exist_ok=True)
 
-def moveContents(course, lectureNumber):
+def moveContents(course, weekNumber, lectureNumber):
   filePaths = glob.glob("inbox/*")
-  destination = f"lectures/{course}/weeks/week-{lectureNumber}"
+  destination = f"lectures/{course}/weeks/week-{weekNumber}/lecture-{lectureNumber}"
 
   mp4Files = [path for path in filePaths if path.lower().endswith(".mp4")]
   pdfFiles = [path for path in filePaths if path.lower().endswith(".pdf")]

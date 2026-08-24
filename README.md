@@ -12,15 +12,20 @@ A personal automation pipeline that turns raw lecture recordings and slide decks
 
 ```
 lectures/
-  weeks/
-    week-1/
-      *.mp4      (raw lecture recording — ignored by git)
-      *.wav      (extracted audio — ignored by git)
-      *.pdf      (lecture slides — ignored by git)
-      *.srt      (generated transcript — ignored by git)
+  {course}/
+    weeks/
+      week-1/
+        lecture-1/
+          *.mp4      (raw lecture recording — ignored by git)
+          *.wav      (extracted audio — ignored by git)
+          *.pdf      (lecture slides — ignored by git)
+          output/
+            *.txt    (generated transcript — ignored by git)
+        lecture-2/
+          ...
 ```
 
-Each week's raw files and generated outputs are excluded from version control (see `.gitignore`) — only the processing scripts are tracked.
+A week can contain multiple lectures — each lecture gets its own `lecture-N` folder under the relevant `week-N` folder. Each lecture's raw files and generated outputs are excluded from version control (see `.gitignore`) — only the processing scripts are tracked.
 
 ## Requirements
 
@@ -63,13 +68,13 @@ If you don't have an NVIDIA GPU, transcription will fall back to running on CPU 
 
 ## Usage
 
-Set the target week and run the transcription script:
+Set the target course, week, and lecture number, and run the pipeline:
 
 ```bash
-python main.py {course} {week number}
+python main.py {course} {week number} {lecture number}
 ```
 
-This will locate the `.mp4` in the matching `lectures/weeks/week-X/` folder, extract audio, transcribe it, and write out `week-X.srt` in the same folder.
+This will move the files waiting in `inbox/` into `lectures/{course}/weeks/week-N/lecture-N/`, locate the `.mp4` there, extract audio, transcribe it, and write the transcript and parsed slide Markdown into that lecture's `output/` folder.
 
 ## Status
 

@@ -7,22 +7,23 @@ from collections import defaultdict
 import imagehash
 from PIL import Image
 
-def convertToMarkdown(course, lectureNumber):
-    pdfs = glob.glob(f"lectures/{course}/weeks/week-{lectureNumber}/*.pdf")
+def convertToMarkdown(course, weekNumber, lectureNumber):
+    lecture_dir = f"lectures/{course}/weeks/week-{weekNumber}/lecture-{lectureNumber}"
+    pdfs = glob.glob(f"{lecture_dir}/*.pdf")
 
     for pdf in pdfs:
-        image_path = f"lectures/{course}/weeks/week-{lectureNumber}/output/images"
+        image_path = f"{lecture_dir}/output/images"
         md_text = pymupdf4llm.to_markdown(pdf, write_images=True, image_path=image_path)
 
-        output_file = f"lectures/{course}/weeks/week-{lectureNumber}/output/{course}-lecture-{lectureNumber}.md"
+        output_file = f"{lecture_dir}/output/{course}-week-{weekNumber}-lecture-{lectureNumber}.md"
 
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(md_text)
 
-def filterTemplateImages(course, lectureNumber, max_occurrences=2, min_area=100 * 100):
-    output_dir = f"lectures/{course}/weeks/week-{lectureNumber}/output"
+def filterTemplateImages(course, weekNumber, lectureNumber, max_occurrences=2, min_area=100 * 100):
+    output_dir = f"lectures/{course}/weeks/week-{weekNumber}/lecture-{lectureNumber}/output"
     image_dir = f"{output_dir}/images"
-    md_path = f"{output_dir}/{course}-lecture-{lectureNumber}.md"
+    md_path = f"{output_dir}/{course}-week-{weekNumber}-lecture-{lectureNumber}.md"
 
     image_files = glob.glob(f"{image_dir}/*")
 

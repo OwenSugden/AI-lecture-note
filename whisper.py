@@ -27,10 +27,11 @@ _load_cuda_dlls()
 
 from faster_whisper import WhisperModel
 
-def transcribe(course, lectureNumber):
-    video_path = glob.glob(f"lectures/{course}/weeks/week-{lectureNumber}/*.mp4")[0]
-    subprocess.run(["ffmpeg", "-i", video_path, f"lectures/{course}/weeks/week-{lectureNumber}/week-{lectureNumber}.wav"])
-    audio_path = glob.glob(f"lectures/{course}/weeks/week-{lectureNumber}/*.wav")[0]
+def transcribe(course, weekNumber, lectureNumber):
+    lecture_dir = f"lectures/{course}/weeks/week-{weekNumber}/lecture-{lectureNumber}"
+    video_path = glob.glob(f"{lecture_dir}/*.mp4")[0]
+    subprocess.run(["ffmpeg", "-i", video_path, f"{lecture_dir}/lecture-{lectureNumber}.wav"])
+    audio_path = glob.glob(f"{lecture_dir}/*.wav")[0]
 
     try:
         model = WhisperModel("medium", device="cuda", compute_type="float16")
@@ -40,7 +41,7 @@ def transcribe(course, lectureNumber):
 
     segments, info = model.transcribe(audio_path)
 
-    txt_path = f"lectures/{course}/weeks/week-{lectureNumber}/output/week-{lectureNumber}.txt"
+    txt_path = f"{lecture_dir}/output/lecture-{lectureNumber}.txt"
     with open(txt_path, "w") as file:
         for segment in segments:
             file.write(segment.text.strip() + " ")
